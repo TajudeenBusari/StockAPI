@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Stock.API.Data;
+using Stock.API.Interfaces;
+using Stock.API.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen();
+
 //inject controller
 builder.Services.AddControllers();
 
@@ -16,6 +19,9 @@ builder.Services.AddDbContext<ApplicationDBContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+//inject respository
+builder.Services.AddScoped<IStockRepository, StockRepository>();
 
 var app = builder.Build();
 
