@@ -103,8 +103,10 @@ public class StockController: ControllerBase
         {
             return NotFound();
         }
+        //map domain to dto
+        var existingStockDto = existingStock.ToStockDto();
         
-        return NoContent();
+        return Ok(existingStockDto);
     }
 }
 
