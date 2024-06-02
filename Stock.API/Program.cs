@@ -20,8 +20,17 @@ builder.Services.AddDbContext<ApplicationDBContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
-//inject respository
+//inject StockRepository
 builder.Services.AddScoped<IStockRepository, StockRepository>();
+
+//inject CommentRepository
+builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+
+//inject newton soft here. prevents object cycle
+builder.Services.AddControllers().AddNewtonsoftJson(options =>
+{
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+});
 
 var app = builder.Build();
 

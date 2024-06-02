@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="StockAPI@." uuid="6357248c-34e7-48ed-bed1-dd24f40872aa">
+    <data-source source="LOCAL" name="StockAPI@." uuid="44da0693-1f71-47ee-acaa-98bf0cee3653">
       <driver-ref>sqlserver.jb</driver-ref>
       <synchronize>true</synchronize>
       <configured-by-url>true</configured-by-url>

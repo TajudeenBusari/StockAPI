@@ -18,7 +18,7 @@ public class StockDto
     
     public long MarketCap { get; set; }
     
+   
     //one to many
-    //we don't want to return any comment to the client
-    /*public List<Comment> Comments { get; set; } = new List<Comment>();*/
+    public List<CommentDto> Comments { get; set; }
 }
