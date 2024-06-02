@@ -18,13 +18,19 @@ public class StockRepository: IStockRepository
     //GET ALL
     public async Task<List<Models.Stock>> GetAllAsync()
     {
-        return await _context.Stock.ToListAsync();
+        return await _context
+            .Stock
+            .Include(c => c.Comments)
+            .ToListAsync();
     }
     
     //GET A SINGLE
     public async Task<Models.Stock?> GetByIdAsync(int id)
     {
-        return await _context.Stock.FirstOrDefaultAsync(x => x.Id == id);
+        return await _context
+            .Stock
+            .Include(c => c.Comments)
+            .FirstOrDefaultAsync(x => x.Id == id);
     }
     
     //CREATE STOCK
@@ -68,5 +74,13 @@ public class StockRepository: IStockRepository
         _context.Stock.Remove(existingStockModel);
         await _context.SaveChangesAsync();
         return existingStockModel;
+    }
+
+    //CHECK IF Stock exists
+    public Task<bool> StockExists(int id)
+    {
+        return _context
+            .Stock
+            .AnyAsync(s => s.Id == id);
     }
 }

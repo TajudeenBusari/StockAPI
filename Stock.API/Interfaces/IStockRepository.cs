@@ -18,4 +18,7 @@ public interface IStockRepository
 
     //DELETE A STOCK
     Task<Models.Stock?> DeleteAsync(int id);
+    
+    //CHECK IF STOCK EXISTS
+    Task<bool> StockExists(int id);
 }
