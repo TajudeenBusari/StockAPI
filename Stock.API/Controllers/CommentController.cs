@@ -23,6 +23,10 @@ public class CommentController: ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
         var comments = await _commentRepository.GetAllAsync();
         //we will use select, a javascript map for mapping here
         var commentsDto = comments
@@ -35,6 +39,10 @@ public class CommentController: ControllerBase
     [Route("{id:int}")]
     public async Task<IActionResult> GetById([FromRoute] int id)
     {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
         var commentModel = await _commentRepository.GetByIdAsync(id);
         if (commentModel == null)
         {
@@ -52,6 +60,10 @@ public class CommentController: ControllerBase
     public async Task<IActionResult> Create([FromRoute] int stockId, 
         CreateCommentDto createCommentDto )
     {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
         //first check if stockId exists, for this we will create a method inside the stock repo
         if (!await _stockRepository.StockExists(stockId))
         {
@@ -59,7 +71,9 @@ public class CommentController: ControllerBase
         }
 
         var createCommentModel = createCommentDto.MapFromCreateCommentDtoToComment(stockId);
+        
         await _commentRepository.CreateAsync(createCommentModel);
+        
         return CreatedAtAction(nameof(GetById), 
             new { id = createCommentModel.Id},
             createCommentModel.MapFromCommentToCommentDto());
@@ -71,6 +85,10 @@ public class CommentController: ControllerBase
     public async Task<IActionResult> Update([FromRoute] int id, 
         [FromBody] UpdateRequestCommentDto updateRequestCommentDto)
     {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
         var commentModel= updateRequestCommentDto.MapFromUpdateCommentDtoToComment();
         commentModel = await _commentRepository.UpdateAsync(id, commentModel);
         
@@ -89,6 +107,10 @@ public class CommentController: ControllerBase
     [Route("{id:int}")]
     public async Task<IActionResult> Delete([FromRoute] int id)
     {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
         var commentModel = await _commentRepository.DeleteAsync(id);
         if (commentModel == null)
         {
