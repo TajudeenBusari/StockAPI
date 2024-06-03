@@ -9,7 +9,12 @@ public class QueryObject
     
     public bool IsDescending { get; set; } = false;
 
+    public int PageNumber { get; set; } = 1;
+
+    public int PageSize { get; set; } = 20;
+
 }
 /*In this class we will create properties:
  symbol and company name
- sortBy and ascending*/
+ sortBy and ascending
+ pageNumber*/

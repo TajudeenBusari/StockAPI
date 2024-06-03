@@ -52,9 +52,11 @@ public class StockRepository: IStockRepository
                    : stocks.OrderBy(s => s.Symbol);
            }
        }
+       //pagination
+       var skipNumber = (queryObject.PageNumber - 1) * queryObject.PageSize;
        
 
-       return await stocks.ToListAsync();
+       return await stocks.Skip(skipNumber).Take(queryObject.PageSize).ToListAsync();
     }
     
     //GET A SINGLE
