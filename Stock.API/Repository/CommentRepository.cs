@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Stock.API.Data;
 using Stock.API.Interfaces;
 using Stock.API.Models;
+using Stock.API.Objects;
 
 namespace Stock.API.Repository;
 

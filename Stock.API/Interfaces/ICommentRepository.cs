@@ -1,4 +1,5 @@
 using Stock.API.Models;
+using Stock.API.Objects;
 
 namespace Stock.API.Interfaces;
 

@@ -1,11 +1,12 @@
 using Stock.API.Dtos;
+using Stock.API.Objects;
 
 namespace Stock.API.Interfaces;
 
 public interface IStockRepository
 {
     //GET ALL
-    Task<List<Models.Stock>> GetAllAsync();
+    Task<List<Models.Stock>> GetAllAsync(QueryObject queryObject);
     
     //GET A SINGLE STOCK
     Task<Models.Stock?> GetByIdAsync(int id); //will have firstOrDefault
