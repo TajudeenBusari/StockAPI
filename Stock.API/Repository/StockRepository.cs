@@ -29,6 +29,7 @@ public class StockRepository: IStockRepository
            .Stock
            .Include(c => c.Comments).AsQueryable();
        
+       //filtering
        if (!string.IsNullOrWhiteSpace(queryObject.CompanyName))
        {
            stocks = stocks
@@ -40,6 +41,18 @@ public class StockRepository: IStockRepository
            stocks = stocks
                .Where(s => s.Symbol.Contains(queryObject.Symbol));
        }
+       //sorting
+       if (!string.IsNullOrWhiteSpace(queryObject.SortBy))
+       {
+           //sort by symbol or anyone you wish
+           if (queryObject.SortBy.Equals("Symbol", StringComparison.OrdinalIgnoreCase))
+           {
+               stocks = queryObject.IsDescending
+                   ? stocks.OrderByDescending(s => s.Symbol)
+                   : stocks.OrderBy(s => s.Symbol);
+           }
+       }
+       
 
        return await stocks.ToListAsync();
     }
