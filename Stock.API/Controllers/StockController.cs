@@ -4,6 +4,7 @@ using Stock.API.Data;
 using Stock.API.Dtos;
 using Stock.API.Interfaces;
 using Stock.API.Mappers;
+using Stock.API.Objects;
 
 namespace Stock.API.Controllers;
 
@@ -20,13 +21,13 @@ public class StockController: ControllerBase
     }
     //GET ALL
     [HttpGet]
-    public async Task <IActionResult> GetAll()
+    public async Task <IActionResult> GetAll([FromQuery] QueryObject queryObject)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
-        var stocks = await _stockRepository.GetAllAsync();
+        var stocks = await _stockRepository.GetAllAsync(queryObject);
         var stocksDto =  stocks.Select(s => s.ToStockDto()); //another wat to convert Domain to Dto
         return Ok(stocksDto);
     }
