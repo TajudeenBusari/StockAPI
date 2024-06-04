@@ -4,6 +4,6 @@ namespace Stock.API.Models;
 
 public class AppUser: IdentityUser
 {
-    //public string Name { get; set; }
+    //many to many
+    public List<Portfolio> Portfolios { get; set; } = new List<Portfolio>();
 }
-//this class can be empty, all user prop are inherited from IdentityUser
