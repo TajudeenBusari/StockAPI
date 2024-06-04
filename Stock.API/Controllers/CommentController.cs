@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Stock.API.Data;
 using Stock.API.Dtos;
@@ -21,6 +22,7 @@ public class CommentController: ControllerBase
     
     //GET ALL COMMENTS
     [HttpGet]
+    [Authorize]
     public async Task<IActionResult> GetAll()
     {
         if (!ModelState.IsValid)
