@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Stock.API.Data;
@@ -21,6 +22,7 @@ public class StockController: ControllerBase
     }
     //GET ALL
     [HttpGet]
+    [Authorize]
     public async Task <IActionResult> GetAll([FromQuery] QueryObject queryObject)
     {
         if (!ModelState.IsValid)
