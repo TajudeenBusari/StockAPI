@@ -102,6 +102,9 @@ builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 //inject TokenRepository
 builder.Services.AddScoped<ITokenService, TokenService>();
 
+//inject PortfolioRepository
+builder.Services.AddScoped<IPortfolioRepository, PortfolioRepository>();
+
 //inject newton soft here. prevents object cycle
 builder.Services.AddControllers().AddNewtonsoftJson(options =>
 {
