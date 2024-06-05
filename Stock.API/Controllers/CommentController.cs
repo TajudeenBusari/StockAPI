@@ -7,6 +7,7 @@ using Stock.API.Extensions;
 using Stock.API.Interfaces;
 using Stock.API.Mappers;
 using Stock.API.Models;
+using Stock.API.Objects;
 
 namespace Stock.API.Controllers;
 
@@ -32,13 +33,13 @@ public class CommentController: ControllerBase
     //GET ALL COMMENTS
     [HttpGet]
     [Authorize]
-    public async Task<IActionResult> GetAll()
+    public async Task<IActionResult> GetAll([FromQuery]CommentQueryObject commentQueryObject)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
-        var comments = await _commentRepository.GetAllAsync();
+        var comments = await _commentRepository.GetAllAsync(commentQueryObject);
         //we will use select, a javascript map for mapping here
         var commentsDto = comments
             .Select(s => s.MapFromCommentToCommentDto());

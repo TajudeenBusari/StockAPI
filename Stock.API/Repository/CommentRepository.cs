@@ -16,12 +16,21 @@ public class CommentRepository: ICommentRepository
     }
     
     //GET ALL COMMENTS
-    public async Task<List<Comment>> GetAllAsync()
+    public async Task<List<Comment>> GetAllAsync(CommentQueryObject commentQueryObject)
     {
-        return await _context
+        var comments = _context
             .Comments
             .Include(a => a.AppUser)
-            .ToListAsync();
+            .AsQueryable();
+        if (!string.IsNullOrWhiteSpace(commentQueryObject.Symbol))
+        {
+            comments = comments.Where(s => s.Stock.Symbol == commentQueryObject.Symbol);
+        };
+        if (commentQueryObject.IsDescending == true)
+        {
+            comments = comments.OrderByDescending(c => c.CreatedOn);
+        }
+        return await comments.ToListAsync();
     }
 
     //GET BY ID

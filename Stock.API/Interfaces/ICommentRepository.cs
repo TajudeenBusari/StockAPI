@@ -6,7 +6,7 @@ namespace Stock.API.Interfaces;
 public interface ICommentRepository
 {
     //GET ALL
-    Task<List<Comment>> GetAllAsync();
+    Task<List<Comment>> GetAllAsync(CommentQueryObject commentQueryObject);
     
     //GET BY ID
     Task<Comment?> GetByIdAsync(int id);
