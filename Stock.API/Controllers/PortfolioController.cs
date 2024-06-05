@@ -14,14 +14,18 @@ public class PortfolioController: ControllerBase
     private readonly UserManager<AppUser> _userManager;
     private readonly IStockRepository _stockRepository;
     private readonly IPortfolioRepository _portfolioRepository;
+    private readonly IFMPService _fmpService;
     
     public PortfolioController(UserManager<AppUser> userManager, 
         IStockRepository stockRepository, 
-        IPortfolioRepository portfolioRepository)
+        IPortfolioRepository portfolioRepository,
+        IFMPService fmpService)
     {
         _portfolioRepository = portfolioRepository;
         _userManager = userManager;
         _stockRepository = stockRepository;
+        _fmpService = fmpService;
+
     }
     
     //GET USER PORTFOLIO
@@ -44,6 +48,20 @@ public class PortfolioController: ControllerBase
         var username = User.GetUsername();
         var appUser = await _userManager.FindByNameAsync(username);
         var stock = await _stockRepository.GetBySymbolAsync(symbol);
+        
+        if (stock == null)
+        {
+            stock = await _fmpService.FindStockBySymbolAsync(symbol);
+            if (stock == null)
+            {
+                return BadRequest("Stock does not exist");
+            }
+            else
+            {
+                await _stockRepository.CreateAsync(stock);
+            }
+        }
+        
         
         //do quick check if stock exist
         //user check is already being performed by authorization

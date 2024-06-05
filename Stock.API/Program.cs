@@ -105,6 +105,10 @@ builder.Services.AddScoped<ITokenService, TokenService>();
 //inject PortfolioRepository
 builder.Services.AddScoped<IPortfolioRepository, PortfolioRepository>();
 
+//inject FMP Service for scope and HttpClient
+builder.Services.AddScoped<IFMPService, FMPService>();
+builder.Services.AddHttpClient<IFMPService, FMPService>();
+
 //inject newton soft here. prevents object cycle
 builder.Services.AddControllers().AddNewtonsoftJson(options =>
 {

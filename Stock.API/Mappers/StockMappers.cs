@@ -38,4 +38,19 @@ public static class StockMappers
         };
     }
     
+    //From FMP To stock
+    public static Models.Stock MapFromFMPStock(this FMPStock fmpStock)
+    {
+        return new Models.Stock
+        {
+            Symbol = fmpStock.symbol,
+            CompanyName = fmpStock.companyName,
+            Purchase = (decimal)fmpStock.price,
+            LastDiv = (decimal)fmpStock.lastDiv,
+            Industry = fmpStock.industry,
+            MarketCap = fmpStock.mktCap
+        };
+
+    }
+    
 }
