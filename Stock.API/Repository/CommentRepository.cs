@@ -18,7 +18,10 @@ public class CommentRepository: ICommentRepository
     //GET ALL COMMENTS
     public async Task<List<Comment>> GetAllAsync()
     {
-        return await _context.Comments.ToListAsync();
+        return await _context
+            .Comments
+            .Include(a => a.AppUser)
+            .ToListAsync();
     }
 
     //GET BY ID
@@ -26,6 +29,7 @@ public class CommentRepository: ICommentRepository
     {
         return await _context
             .Comments
+            .Include(a => a.AppUser)
             .FirstOrDefaultAsync(x => x.Id == id);
     }
 

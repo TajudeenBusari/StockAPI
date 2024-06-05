@@ -30,7 +30,9 @@ public class StockController: ControllerBase
             return BadRequest(ModelState);
         }
         var stocks = await _stockRepository.GetAllAsync(queryObject);
-        var stocksDto =  stocks.Select(s => s.ToStockDto()); //another wat to convert Domain to Dto
+        var stocksDto =  stocks
+            .Select(s => s.ToStockDto()) //another wat to convert Domain to Dto
+            .ToList(); 
         return Ok(stocksDto);
     }
     

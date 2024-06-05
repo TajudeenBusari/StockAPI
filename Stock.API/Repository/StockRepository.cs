@@ -27,7 +27,9 @@ public class StockRepository: IStockRepository
         
        var stocks = _context
            .Stock
-           .Include(c => c.Comments).AsQueryable();
+           .Include(c => c.Comments)
+           .ThenInclude(a => a.AppUser)
+           .AsQueryable();
        
        //filtering
        if (!string.IsNullOrWhiteSpace(queryObject.CompanyName))
@@ -65,6 +67,7 @@ public class StockRepository: IStockRepository
         return await _context
             .Stock
             .Include(c => c.Comments)
+            .ThenInclude(a => a.AppUser)
             .FirstOrDefaultAsync(x => x.Id == id);
     }
 
