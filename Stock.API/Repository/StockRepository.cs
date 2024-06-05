@@ -59,7 +59,7 @@ public class StockRepository: IStockRepository
        return await stocks.Skip(skipNumber).Take(queryObject.PageSize).ToListAsync();
     }
     
-    //GET A SINGLE
+    //GET A SINGLE BY ID
     public async Task<Models.Stock?> GetByIdAsync(int id)
     {
         return await _context
@@ -67,7 +67,15 @@ public class StockRepository: IStockRepository
             .Include(c => c.Comments)
             .FirstOrDefaultAsync(x => x.Id == id);
     }
-    
+
+    //GET A SINGLE BY SYMBOL
+    public async Task<Models.Stock?> GetBySymbolAsync(string symbol)
+    {
+        return await _context
+            .Stock
+            .FirstOrDefaultAsync(s => s.Symbol == symbol);
+    }
+
     //CREATE STOCK
     public async Task<Models.Stock> CreateAsync(Models.Stock stockModel)
     {
