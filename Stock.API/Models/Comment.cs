@@ -12,4 +12,8 @@ public class Comment
     //navigation property
     public int? StockId { get; set; }
     public Stock? Stock { get; set; }
+    
+    //one to one
+    public string AppUserId { get; set; }
+    public AppUser AppUser { get; set; }
 }
