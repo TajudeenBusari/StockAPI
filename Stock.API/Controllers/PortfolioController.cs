@@ -72,4 +72,30 @@ public class PortfolioController: ControllerBase
         }
         
     }
+    
+    //DELETE USER PORTFOLIO
+    [HttpDelete]
+    [Authorize]
+    public async Task<IActionResult> DeletePortfolio(string symbol)
+    {
+        var username = User.GetUsername();
+        var appUser = await _userManager.FindByNameAsync(username);
+        var userPortfolio = await _portfolioRepository.GetUserPortfolio(appUser);
+        
+        //compare the user portfolio with the symbol provided
+        var filteredStocks = userPortfolio
+            .Where(s => s.Symbol.ToLower() == symbol.ToLower())
+            .ToList();
+
+        if (filteredStocks.Count() == 1)
+        {
+            await _portfolioRepository.DeleteUserPortfolioAsync(appUser, symbol);
+        }
+        else
+        {
+            return BadRequest("Stock not in your portfolio");
+        }
+
+        return Ok("Portfolio successfully deleted");
+    }
 }
