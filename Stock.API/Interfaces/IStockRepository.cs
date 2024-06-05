@@ -8,8 +8,11 @@ public interface IStockRepository
     //GET ALL
     Task<List<Models.Stock>> GetAllAsync(QueryObject queryObject);
     
-    //GET A SINGLE STOCK
+    //GET A SINGLE STOCK BY ID
     Task<Models.Stock?> GetByIdAsync(int id); //will have firstOrDefault
+    
+    //GET A SINGLE STOCK BY SYMBOL
+    Task<Models.Stock?> GetBySymbolAsync(string symbol);
 
     //CREATE A STOCK
     Task <Models.Stock>CreateAsync(Models.Stock stockModel);
