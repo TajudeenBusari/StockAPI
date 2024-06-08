@@ -13,11 +13,10 @@ namespace Stock.API.Controllers;
 [ApiController]
 public class StockController: ControllerBase
 {
-    private readonly ApplicationDBContext _context;
+    
     private readonly IStockRepository _stockRepository;
-    public StockController(ApplicationDBContext context, IStockRepository stockRepository)
+    public StockController(IStockRepository stockRepository)
     {
-        _context = context;
         _stockRepository = stockRepository;
     }
     //GET ALL
@@ -30,8 +29,9 @@ public class StockController: ControllerBase
             return BadRequest(ModelState);
         }
         var stocks = await _stockRepository.GetAllAsync(queryObject);
+        
         var stocksDto =  stocks
-            .Select(s => s.ToStockDto()) //another wat to convert Domain to Dto
+            .Select(s => StockMappers.ToStockDto(s)) //another wat to convert Domain to Dto
             .ToList(); 
         return Ok(stocksDto);
     }
@@ -52,7 +52,8 @@ public class StockController: ControllerBase
         }
 
         //convert to dto
-        var foundStockDto = stockDomain.ToStockDto();
+        var foundStockDto = StockMappers.ToStockDto(stockDomain);
+        //stockDomain.ToStockDto()
 
         return Ok(foundStockDto);
     }
@@ -65,9 +66,12 @@ public class StockController: ControllerBase
         {
             return BadRequest(ModelState);
         }
-        var stockModel = createRequestStockDto.ToStockFromStockDto();
+        //stockModel.ToStockDto()
+        //var stockModel = createRequestStockDto.ToStockFromStockDto();
+        var stockModel = StockMappers.ToStockFromStockDto(createRequestStockDto);
         await _stockRepository.CreateAsync(stockModel);
-        return CreatedAtAction(nameof(GetById), new {Id = stockModel.Id}, stockModel.ToStockDto());
+        var stockDto = StockMappers.ToStockDto(stockModel);
+        return CreatedAtAction(nameof(GetById), new {Id = stockModel.Id}, stockDto);
     }
     
     //Update A STOCK
@@ -88,7 +92,8 @@ public class StockController: ControllerBase
         }
         
         //convert updated stockModel to dto
-        var updatedStockDto = stockModel.ToStockDto();
+        //stockModel.ToStockDto()
+        var updatedStockDto = StockMappers.ToStockDto(stockModel);
         
         return Ok(updatedStockDto);
     }
@@ -109,7 +114,8 @@ public class StockController: ControllerBase
             return NotFound();
         }
         //map domain to dto
-        var existingStockDto = existingStock.ToStockDto();
+        //existingStock.ToStockDto()
+        var existingStockDto = StockMappers.ToStockDto(existingStock);
         
         return Ok(existingStockDto);
     }

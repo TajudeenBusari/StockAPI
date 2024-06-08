@@ -1,4 +1,19 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
 	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
   &lt;Assembly Path="C:\Users\tajud\.nuget\packages\microsoft.aspnetcore.openapi\8.0.5\lib\net8.0\Microsoft.AspNetCore.OpenApi.dll" /&gt;&#xD;
-&lt;/AssemblyExplorer&gt;</s:String></wpf:ResourceDictionary>
+&lt;/AssemblyExplorer&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=42010742_002D3590_002D4d62_002Da396_002Daf44f73a1d53/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="StockControllerTest #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::AA3F0FBC-2017-4781-9C9A-17B76D86CB5A::net8.0::Stock.UnitTests.Systems.Controllers.StockControllerTest&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=6e1b70cc_002D86f0_002D472b_002D8297_002D790edc28d2bb/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="StockControllerTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::AA3F0FBC-2017-4781-9C9A-17B76D86CB5A::net8.0::Stock.UnitTests.Systems.Controllers.StockControllerTest&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=c69ccbda_002Db5f1_002D4ee2_002Da139_002Da78d9c3a64fc/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="testFindAllStock_OnSuccess_ReturnsStatusCode200Ok" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::AA3F0FBC-2017-4781-9C9A-17B76D86CB5A::net8.0::Stock.UnitTests.Systems.Controllers.StockControllerTest&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
