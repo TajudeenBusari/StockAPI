@@ -3,10 +3,10 @@ using Stock.API.Models;
 
 namespace Stock.API.Mappers;
 
-public static class StockMappers
+public class StockMappers
 {
     //stock To stockDto
-    public static StockDto ToStockDto(this Models.Stock stockModel)
+    public static StockDto ToStockDto( Models.Stock stockModel)
     {
         return new StockDto
         {
@@ -18,14 +18,15 @@ public static class StockMappers
             Industry = stockModel.Industry,
             MarketCap = stockModel.MarketCap,
             Comments = stockModel.Comments
-                .Select(c => c.MapFromCommentToCommentDto())
+                .Select(c => CommentMappers.MapFromCommentToCommentDto(c))
                 .ToList()
+            //c.MapFromCommentToCommentDto()
         };
 
     }
     
     //stockDto To stock
-    public static Models.Stock ToStockFromStockDto(this CreateRequestStockDto createRequestStockDto)
+    public static Models.Stock ToStockFromStockDto( CreateRequestStockDto createRequestStockDto)
     {
         return new Models.Stock
         {
@@ -39,7 +40,7 @@ public static class StockMappers
     }
     
     //From FMP To stock
-    public static Models.Stock MapFromFMPStock(this FMPStock fmpStock)
+    public static Models.Stock MapFromFMPStock(FMPStock fmpStock)
     {
         return new Models.Stock
         {

@@ -3,10 +3,10 @@ using Stock.API.Models;
 
 namespace Stock.API.Mappers;
 
-public static class CommentMappers
+public class CommentMappers
 {
     //Comment to commentDto
-    public static CommentDto MapFromCommentToCommentDto(this Comment commentModel)
+    public static CommentDto MapFromCommentToCommentDto(Comment commentModel)
     {
         return new CommentDto
         {
@@ -20,7 +20,7 @@ public static class CommentMappers
     }
     
     //CreateCommentDto to comment
-    public static Comment MapFromCreateCommentDtoToComment(this CreateCommentDto createCommentDto, int stockId)
+    public static Comment MapFromCreateCommentDtoToComment(CreateCommentDto createCommentDto, int stockId)
     {
         return new Comment
         {
@@ -31,7 +31,7 @@ public static class CommentMappers
     }
     
     //UpdateCommentDto To comment
-    public static Comment MapFromUpdateCommentDtoToComment(this UpdateRequestCommentDto updateRequestCommentDto)
+    public static Comment MapFromUpdateCommentDtoToComment(UpdateRequestCommentDto updateRequestCommentDto)
     {
         return new Comment
         {

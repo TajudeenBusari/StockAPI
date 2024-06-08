@@ -42,7 +42,7 @@ public class CommentController: ControllerBase
         var comments = await _commentRepository.GetAllAsync(commentQueryObject);
         //we will use select, a javascript map for mapping here
         var commentsDto = comments
-            .Select(s => s.MapFromCommentToCommentDto());
+            .Select(s => CommentMappers.MapFromCommentToCommentDto(s));
         return Ok(commentsDto);
     }
     
@@ -61,7 +61,7 @@ public class CommentController: ControllerBase
             return NotFound();
         }
         //convert to Dto
-        var foundCommentDto = commentModel.MapFromCommentToCommentDto();
+        var foundCommentDto = CommentMappers.MapFromCommentToCommentDto(commentModel);
         
         return Ok(foundCommentDto);
     }
@@ -104,14 +104,16 @@ public class CommentController: ControllerBase
         var username = User.GetUsername();
         var appUser = await _userManager.FindByNameAsync(username);
 
-        var createCommentModel = createCommentDto.MapFromCreateCommentDtoToComment(stock.Id);
+        //var createCommentModel = createCommentDto.MapFromCreateCommentDtoToComment(stock.Id);
+        var createCommentModel = CommentMappers.MapFromCreateCommentDtoToComment(createCommentDto, stock.Id);
         createCommentModel.AppUserId = appUser.Id;
         
         await _commentRepository.CreateAsync(createCommentModel);
+        var commentDto = CommentMappers.MapFromCommentToCommentDto(createCommentModel);
         
         return CreatedAtAction(nameof(GetById), 
             new { id = createCommentModel.Id},
-            createCommentModel.MapFromCommentToCommentDto());
+            commentDto);
     }
     
     //UPDATE A COMMENT
@@ -124,7 +126,8 @@ public class CommentController: ControllerBase
         {
             return BadRequest(ModelState);
         }
-        var commentModel= updateRequestCommentDto.MapFromUpdateCommentDtoToComment();
+        //var commentModel= updateRequestCommentDto.MapFromUpdateCommentDtoToComment();
+        var commentModel = CommentMappers.MapFromUpdateCommentDtoToComment(updateRequestCommentDto);
         commentModel = await _commentRepository.UpdateAsync(id, commentModel);
         
         //check if commentModel exists
@@ -133,7 +136,8 @@ public class CommentController: ControllerBase
             return NotFound("Comment Not Found, Kindly provide the right Comment Id");
         }
         //else, convert commentModel back to Dto
-        var updatedCommentDto = commentModel.MapFromCommentToCommentDto();
+        //var updatedCommentDto = commentModel.MapFromCommentToCommentDto();
+        var updatedCommentDto = CommentMappers.MapFromCommentToCommentDto(commentModel);
         return Ok(updatedCommentDto);
     }
     
@@ -152,7 +156,8 @@ public class CommentController: ControllerBase
             return NotFound("Comment does not exist");
         }
         //map commentModel to dto
-        var commentDto = commentModel.MapFromCommentToCommentDto();
+        //var commentDto = commentModel.MapFromCommentToCommentDto();
+        var commentDto = CommentMappers.MapFromCommentToCommentDto(commentModel);
         return Ok(commentDto);
     }
     

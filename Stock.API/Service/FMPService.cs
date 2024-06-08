@@ -27,7 +27,8 @@ public class FMPService: IFMPService
                 var stock = tasks[0];
                 if (stock != null)
                 {
-                    return stock.MapFromFMPStock();
+                    return StockMappers.MapFromFMPStock(stock);
+                    //stock.MapFromFMPStock()
                 }
 
                 return null;
