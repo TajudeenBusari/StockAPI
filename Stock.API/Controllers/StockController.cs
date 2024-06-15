@@ -39,6 +39,7 @@ public class StockController: ControllerBase
     //GET A SINGLE STOCK
     [HttpGet]
     [Route("{id:int}")]
+    [Authorize]
     public async Task<IActionResult> GetById([FromRoute] int id)
     {
         if (!ModelState.IsValid)
@@ -60,6 +61,7 @@ public class StockController: ControllerBase
     
     //POST A STOCK
     [HttpPost]
+    [Authorize]
     public async Task<IActionResult> Create([FromBody] CreateRequestStockDto createRequestStockDto)
     {
         if (!ModelState.IsValid)
@@ -75,6 +77,7 @@ public class StockController: ControllerBase
     }
     
     //Update A STOCK
+    [Authorize]
     [HttpPut]
     [Route("{id:int}")]
     public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateRequestStockDto updateRequestDto)
@@ -99,6 +102,7 @@ public class StockController: ControllerBase
     }
     
     //DELETE A STOCK
+    [Authorize]
     [HttpDelete]
     [Route("{id:int}")]
     public async Task<IActionResult> Delete([FromRoute] int id)

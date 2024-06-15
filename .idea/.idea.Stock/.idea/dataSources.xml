@@ -9,5 +9,13 @@
       <jdbc-url>Server=.;Database=StockAPI;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=True;</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="Microsoft SQL Server LocalDB (JetBrains)" uuid="115768a8-f93b-42ac-a3fd-255ef4b2a1a3">
+      <driver-ref>sqlserver.localdb.jb</driver-ref>
+      <synchronize>true</synchronize>
+      <configured-by-url>true</configured-by-url>
+      <jdbc-driver>com.jetbrains.jdbc.sqlserver.SqlServerDriver</jdbc-driver>
+      <jdbc-url>Server=.;Database=StockAPI;Trusted_Connection=True;TrustServerCertificate=True;MultipleActiveResultSets=True;</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>
