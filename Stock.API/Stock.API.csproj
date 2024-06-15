@@ -24,5 +24,23 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
+  <ItemGroup>
+	<InternalsVisibleTo Include="Stock.API.IntegrationTests"/>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <InternalsVisibleTo Include="Stock.API.IntegrationTests2"/>
+
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Stock.API.IntegrationTests3"/>
+
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Stock.API.IntegrationTests4"/>
+
+  </ItemGroup>
 
 </Project>

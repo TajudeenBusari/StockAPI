@@ -52,6 +52,7 @@ public class AccountController : ControllerBase
                 Email = user.Email,
                 Token = _tokenService.CreateToken(user)
             });
+        
     }
     
     //CREATE USER

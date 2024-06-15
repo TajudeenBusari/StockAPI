@@ -53,10 +53,17 @@ builder.Services.AddSwaggerGen(option =>
 builder.Services.AddControllers();
 
 //inject dbcontext
-builder.Services.AddDbContext<ApplicationDBContext>(options =>
+/*if (builder.Environment.Equals("Testing"))
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-});
+    builder.Services.AddDbContext<ApplicationDBContext>(options => 
+        options.UseInMemoryDatabase("testDB"));
+}*/
+
+builder.Services.AddDbContext<ApplicationDBContext>(options =>
+    {
+        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    });
+
 
 //inject AppUser DbContext here
 builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
@@ -145,5 +152,5 @@ app.MapControllers();
 app.Run();
 
 
-
+public partial class Program{}
 //C:\Users\tajud\DotNetProjects\Stock\Stock.API\Stock.API.csproj
